@@ -128,8 +128,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "164"
             endingLineNumber = "164"
-            landmarkName = "SummaryViewModel"
-            landmarkType = "3">
+            landmarkName = "addProgress(category:name:goalValue:unit:color:icon:period:repeatingId:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
