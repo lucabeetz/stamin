@@ -42,6 +42,7 @@ struct SummaryView: View {
                         
                         ProgressBarItem(name: "Mindfulness today", desc: viewModel.mindfulMinutes.cleanValue + "/15", unit: "MIN", value: Float(viewModel.mindfulMinutes / 15), color: .blue)
                     }
+                    .onAppear(perform: { viewModel.updateActivityData() })
                     
                     ForEach(Array(viewModel.dailyProgressesByCategory.keys.sorted()), id: \.self) { category in
                         TitledGroup(category: category, addProgressButton: true, viewModel: viewModel) {

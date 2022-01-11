@@ -63,8 +63,6 @@ struct ProgressBarItem: View {
 
 struct ProgressBarItem_Previews: PreviewProvider {
     static var previews: some View {
-        let progress = PersistenceController.preview.container.viewContext.registeredObjects.first(where: { $0 is Progress}) as! Progress
-        
         ProgressBarItem(name: "Lifespan", desc: "101/303PGS", unit: "PGS", value: 0.3, color: .orange)
     }
 }

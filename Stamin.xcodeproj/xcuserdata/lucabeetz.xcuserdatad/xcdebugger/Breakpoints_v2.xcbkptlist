@@ -126,8 +126,8 @@
             filePath = "Shared/Model/SummaryViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "addProgress(category:name:goalValue:unit:color:icon:period:repeatingId:)"
             landmarkType = "7">
          </BreakpointContent>

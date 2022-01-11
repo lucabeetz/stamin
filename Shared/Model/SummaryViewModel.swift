@@ -67,26 +67,36 @@ final class SummaryViewModel: ObservableObject {
         }
         self.updateRepeatingProgresses()
         
+        self.updateActivityData()
+    }
+    
+    func updateActivityData() {
         repository.requestActivitySummary() {activitySummary in
-            // Move energy and goal
-            self.moveEnergy = activitySummary.activeEnergyBurned.doubleValue(for: HKUnit.kilocalorie())
-            self.moveEnergyGoal = activitySummary.activeEnergyBurnedGoal.doubleValue(for: HKUnit.kilocalorie())
-            
-            // Exercise time and goal
-            self.exerciseMinutes = activitySummary.appleExerciseTime.doubleValue(for: HKUnit.minute())
-            self.exerciseMinutesGoal = activitySummary.appleExerciseTimeGoal.doubleValue(for: HKUnit.minute())
-            
-            // Stand hours and goal
-            self.standHours = activitySummary.appleStandHours.doubleValue(for: HKUnit.count())
-            self.standHoursGoal = activitySummary.appleStandHoursGoal.doubleValue(for: HKUnit.count())
+            DispatchQueue.main.async {
+                // Move energy and goal
+                self.moveEnergy = activitySummary.activeEnergyBurned.doubleValue(for: HKUnit.kilocalorie())
+                self.moveEnergyGoal = activitySummary.activeEnergyBurnedGoal.doubleValue(for: HKUnit.kilocalorie())
+                
+                // Exercise time and goal
+                self.exerciseMinutes = activitySummary.appleExerciseTime.doubleValue(for: HKUnit.minute())
+                self.exerciseMinutesGoal = activitySummary.appleExerciseTimeGoal.doubleValue(for: HKUnit.minute())
+                
+                // Stand hours and goal
+                self.standHours = activitySummary.appleStandHours.doubleValue(for: HKUnit.count())
+                self.standHoursGoal = activitySummary.appleStandHoursGoal.doubleValue(for: HKUnit.count())
+            }
         }
         
         repository.requestDailyMindfulMinutes() { mindfulMinutes in
-            self.mindfulMinutes = mindfulMinutes
+            DispatchQueue.main.async {
+                self.mindfulMinutes = mindfulMinutes
+            }
         }
         
         repository.requestWeeklyRunKilometers() { weeklyKilometers in
-            self.weeklyKilometers = weeklyKilometers
+            DispatchQueue.main.async {
+                self.weeklyKilometers = weeklyKilometers
+            }
         }
     }
     
