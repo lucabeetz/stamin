@@ -25,31 +25,34 @@ struct DetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                ProgressBarItem(name: progress.name!, desc: "\(progress.currentValue.cleanValue)/\(progress.goalValue.cleanValue)", unit: progress.unit!, value: Float(progress.currentValue / progress.goalValue), color: Color(UIColor.decode(data: progress.color as! Data)!), iconName: progress.iconName ?? "")
+                ProgressBarItem(name: progress.name ?? "", desc: "\(progress.currentValue.cleanValue)/\(progress.goalValue.cleanValue)", unit: progress.unit ?? "", value: Float(progress.currentValue / progress.goalValue), color: progress.color != nil ? Color(UIColor.decode(data: progress.color as! Data)!) : Color.black, iconName: progress.iconName ?? "")
                 
-                ForEach(progress.editValues as! [Int], id: \.self) {editValue in
-                    HStack {
-                        Button(action: { updateValue(progress: progress, editValue: editValue, increase: false) }) {
-                            Text("- " + String(editValue))
-                                .padding()
-                                .frame(maxWidth: .infinity)
+                if progress.editValues != nil {
+                    ForEach(progress.editValues as! [Int], id: \.self) {editValue in
+                        HStack {
+                            Button(action: { updateValue(progress: progress, editValue: editValue, increase: false) }) {
+                                Text("- " + String(editValue))
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .background(.thinMaterial)
+                            .cornerRadius(8.0)
+                            
+                            Button(action: { updateValue(progress: progress, editValue: editValue, increase: true) }) {
+                                Text("+ " + String(editValue))
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .background(.thinMaterial)
+                            .cornerRadius(8.0)
                         }
-                        .background(.thinMaterial)
-                        .cornerRadius(8.0)
-                        
-                        Button(action: { updateValue(progress: progress, editValue: editValue, increase: true) }) {
-                            Text("+ " + String(editValue))
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                        }
-                        .background(.thinMaterial)
-                        .cornerRadius(8.0)
                     }
                 }
                 
                 Button(role: .destructive, action: {
                     viewModel.deleteProgress(progress: progress)
-                    self.presentationMode.wrappedValue.dismiss()}) {
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
                         Text("Delete")
                             .padding()
                             .frame(maxWidth: .infinity)

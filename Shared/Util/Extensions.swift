@@ -15,7 +15,7 @@ extension UIColor {
     }
     
     static func decode(data: Data) -> UIColor? {
-        return try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UIColor
+        return try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data) 
     }
 }
 

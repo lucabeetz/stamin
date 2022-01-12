@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-let availableIcons: [String] = ["flame", "drop", "repeat"]
-let availableColors: [UIColor] = [.systemRed, .systemBlue, .systemCyan, .systemYellow, .systemOrange]
+let availableIcons: [String] = ["flame", "drop", "repeat", "book", "sunrise", "moon", "pencil", "play"]
+let availableColors: [UIColor] = [.systemRed, .systemBlue, .systemCyan, .systemYellow, .systemOrange, .systemPink, .systemBrown, .systemPurple]
 
 
 struct CreateProgressView: View {
@@ -62,7 +62,6 @@ struct CreateProgressView: View {
                 }
                 
                 Button("Add progress") {
-                    print(category)
                     viewModel.createNewProgress(category: category, name: name, goalValue: goalValue, unit: unit, color: color, icon: icon, period: period)
                     self.presentationMode.wrappedValue.dismiss()
                 }

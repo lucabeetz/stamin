@@ -48,9 +48,8 @@ final class SummaryViewModel: ObservableObject {
     @Published var standHours: Double = -1
     @Published var standHoursGoal: Double = -1
     
-    @Published var mindfulMinutes: Double = -1
-    
-    @Published var weeklyKilometers: Double = -1
+    @Published var mindfulMinutes: Double = 0
+    @Published var weeklyKilometers: Double = 0
     
     init(repository: HKRepository, persistenceController: PersistenceController) {
         self.repository = repository
@@ -68,6 +67,7 @@ final class SummaryViewModel: ObservableObject {
         self.updateRepeatingProgresses()
         
         self.updateActivityData()
+        print(self.dailyProgresses.count)
     }
     
     func updateActivityData() {
@@ -141,6 +141,8 @@ final class SummaryViewModel: ObservableObject {
         newRepeatingProgress.iconName = icon
         newRepeatingProgress.color = color.encode()! as NSObject
         newRepeatingProgress.period = period.rawValue
+        
+        self.repeatingProgresses = self.persistenceController.getAllRepeatingProgresses()
     }
     
     func addProgress(category: String, name: String, goalValue: Double, unit: String, color: UIColor, icon: String, period: PeriodTime, repeatingId: NSObject? = nil) {
@@ -175,6 +177,7 @@ final class SummaryViewModel: ObservableObject {
     
     func deleteProgress(progress: Progress) {
         self.persistenceController.deleteProgress(progress: progress)
+        self.repeatingProgresses = self.persistenceController.getAllRepeatingProgresses()
         self.dailyProgressesByCategory = self.persistenceController.getAllDailyProgressesByCategory()
     }
     
